@@ -3,11 +3,13 @@ package decaf;
 import java.io.*;
 import antlr.Token;
 import java6035.tools.CLI.*;
+import decaf.ReferenceGrammer.*;
 
 class Main {
     public static void main(String[] args) {
         try {
-            CLI.parse (args, new String[0]);
+            String[] optnames = {"all", "cse", "cp", "const", "dc" };
+            CLI.parse(args, optnames);
 
             InputStream inputStream = args.length == 0 ? 
                     System.in : new java.io.FileInputStream(CLI.infile);
@@ -53,7 +55,6 @@ class Main {
             } else if (CLI.target == CLI.PARSE || CLI.target == CLI.DEFAULT) {
                 DecafScanner lexer = new DecafScanner(new DataInputStream(inputStream));
                 DecafParser parser = new DecafParser(lexer);
-                // parser.program();
 
                 // Check if parse was successful
                 if (parser.program() == null) {

@@ -18,12 +18,10 @@ tokens
   "void";
   "int";
   "double";
-  "bool";
-  "string";
+  "boolean";
+  "callout";
   "interface";
-  "null";
   "this";
-  "extends";
   "implements";
   "for";
   "while";
@@ -32,7 +30,6 @@ tokens
   "return";
   "continue";
   "break";
-  "New";
   "NewArray";
   "Print";
   "ReadInteger";
@@ -49,7 +46,6 @@ RPAREN options { paraphrase = ")"; } : ")";
 LSQUARE options { paraphrase = "["; } : "[";
 RSQUARE options { paraphrase = "]"; } : "]";
 
-
 WS_ options { paraphrase = "whitespace"; } : (' ' | '\t' | '\n' {newline();}) {_ttype = Token.SKIP; };
 
 SL_COMMENT options { paraphrase = "comment"; } : "//" (~'\n')* '\n' {_ttype = Token.SKIP; newline (); };
@@ -59,19 +55,16 @@ CHAR options { paraphrase = "char literal"; }: '\'' (ESC | VALIDCHARS) '\'';
 COMMA options { paraphrase = "comma"; }: ',';
 SEMI options {paraphrase = "semicolon"; }: ';';
 
-
 // Arithmetic operators
 PLUS options { paraphrase = "plus sign"; } : "+";
 MINUS options { paraphrase = "minus sign"; } : "-";
 MULDIV options { paraphrase = "mul or div operation"; } : "*" | "/" ;
 MOD options { paraphrase = "modulus operation"; } : "%" ;
 
-
 // Assignment operators
 ASSIGNPLUSEQ : "+=" ;
 ASSIGNMINUSEQ : "-=" ;
 ASSIGNEQ : '=' ;
-
 
 // Relation operators
 LESS : "<" ;
@@ -89,7 +82,7 @@ ID options { paraphrase = "an identifier"; } : (ALPHA)(ALPHA_NUM)*;
 INTLIT options { paraphrase= "integer"; } : DECIMAL|HEX;
 
 
-protected ESC :  '\\' ('n' | '"');
+protected ESC :  '\\' ('n' | '"' | '\'' | 't' | 'r' | '\\');
 protected DIGIT : '0'..'9';
 protected ALPHA : 'a'..'z' | 'A'..'Z' | '_';
 protected HEX_DIGIT: DIGIT | 'a'..'f' | 'A'..'F';

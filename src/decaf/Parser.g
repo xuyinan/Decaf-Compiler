@@ -380,7 +380,7 @@ statement returns [Statement stmt]{
     stmt.setColumnNumber(ift.getColumn());
 } (TK_else elseBlock=block { ((IfStmt)stmt).setElseBlock(elseBlock);})?
 ) |
-( fort: TK_for LPAREN ident=id ASSIGNEQ initExpr=expression COMMA finExpr=expression RPAREN forBlock=block
+( fort: TK_for ident=id ASSIGNEQ initExpr=expression COMMA finExpr=expression forBlock=block
 {
     stmt = new ForStmt(ident.getString(), initExpr, finExpr, forBlock);
     stmt.setLineNumber(fort.getLine());
@@ -571,12 +571,12 @@ eq_term returns [Expression expr]{
 });
 
 // Condition AND
-cond_and_termtemp returns [TempExpression tempExpr]{
+cond_and_term_temp returns [TempExpression tempExpr]{
     Expression expr;
     TempExpression tempExprChild;
     tempExpr = null;
 }:
-( at:AND expr=eq_term tempExprChild=cond_and_termtemp 
+( at:AND expr=eq_term tempExprChild=cond_and_term_temp 
 {
     if (tempExprChild==null) tempExpr = new TempExpression(expr, BinOpType.AND);
     else tempExpr = new TempExpression(new BinOpExpr(expr, tempExprChild), BinOpType.AND);
@@ -590,7 +590,7 @@ cond_and_term returns [Expression expr]{
     TempExpression tempExpr;
     expr = null;
 }:
-( exprLeaf=eq_term tempExpr=cond_and_termtemp 
+( exprLeaf=eq_term tempExpr=cond_and_term_temp 
 {
     if (tempExpr==null) expr = exprLeaf;
     else expr = new BinOpExpr(exprLeaf, tempExpr);
@@ -604,7 +604,7 @@ cond_or_termtemp returns [TempExpression tempExpr]{
     TempExpression tempExprChild;
     tempExpr = null;
 }:
-( at:AND expr=cond_and_term tempExprChild=cond_or_termtemp 
+( at:OR expr=cond_and_term tempExprChild=cond_or_termtemp 
 {
     if (tempExprChild==null) tempExpr = new TempExpression(expr, BinOpType.OR);
     else tempExpr = new TempExpression(new BinOpExpr(expr, tempExprChild), BinOpType.OR);
