@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class Parameter extends AST{
     private Type _type;
@@ -31,4 +32,8 @@ public class Parameter extends AST{
         return _type.toString() + " " + _id;
     }
 
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

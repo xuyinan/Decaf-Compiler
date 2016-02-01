@@ -1,4 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
+
+import decaf.ir.ASTvisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,19 +20,19 @@ public class ClassDecl extends AST {
         _methods = methods;
     }
 
-    public void addField(FieldDecl field){
+    public void addFieldDecl(FieldDecl field){
         _fields.add(field);
     }
 
-    public void addMethod(MethodDecl method){
+    public void addMethodDecl(MethodDecl method){
         _methods.add(method);
     }
 
-    public List<FieldDecl> getField(){
+    public List<FieldDecl> getFieldDecls(){
         return _fields;
     }
 
-    public List<MethodDecl> getMethod(){
+    public List<MethodDecl> getMethodDecls(){
         return _methods;
     }
 
@@ -46,4 +48,8 @@ public class ClassDecl extends AST {
         return rst;
     }
 
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

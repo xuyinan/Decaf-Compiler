@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class CalloutArg extends AST{
     private Expression _expr = null;
@@ -29,11 +30,9 @@ public class CalloutArg extends AST{
         return _expr;
     }
 
-    public boolean isString(){
-        if (_str==null){
-            return false;
-        }
-        return true;
+    public boolean isString() {
+        if (_str != null) return true;
+        return false;
     }
 
     @Override
@@ -42,5 +41,10 @@ public class CalloutArg extends AST{
             return _expr.toString();
         }
         return _str;
+    }
+
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
     }
 }

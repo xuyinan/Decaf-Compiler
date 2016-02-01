@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,6 @@ public class MethodCall extends CallExpr {
         _name = name;
         _args = args;
     }
-
 
     public void setId(String name){
         _name = name;
@@ -48,8 +48,10 @@ public class MethodCall extends CallExpr {
         return rst;
     }
 
-
-
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }
 
 

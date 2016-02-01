@@ -1,4 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
+
+import decaf.ir.ASTvisitor;
 
 import java.util.List;
 
@@ -41,4 +43,8 @@ public class CalloutExpr extends CallExpr {
         return "callout (" + _methodName + ", " + _args + ")";
     }
 
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

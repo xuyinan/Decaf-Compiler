@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class Field extends AST{
     private String _id;
@@ -48,5 +49,10 @@ public class Field extends AST{
         }else{
             return _id;
         }
+    }
+
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
     }
 }

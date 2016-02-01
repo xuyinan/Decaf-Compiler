@@ -1,6 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
-
+import decaf.ir.ASTvisitor;
 
 public class AssignStmt extends Statement {
     private Location _loc;
@@ -40,5 +40,10 @@ public class AssignStmt extends Statement {
     @Override
     public String toString() {
         return _loc + " " + _assignOp + " " + _expr;
+    }
+
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
     }
 }

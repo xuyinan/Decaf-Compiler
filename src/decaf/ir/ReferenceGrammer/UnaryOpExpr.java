@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class UnaryOpExpr extends Expression{
 
@@ -32,5 +33,9 @@ public class UnaryOpExpr extends Expression{
         return _op.toString() + _expr;
     }
 
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }
 

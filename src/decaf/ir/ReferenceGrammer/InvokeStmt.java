@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class InvokeStmt extends Statement {
 	private CallExpr _methodCall;
@@ -8,12 +9,12 @@ public class InvokeStmt extends Statement {
 		_methodCall = e;
 	}
 
-	public CallExpr getMethodCall() {
-		return _methodCall;
-	}
-
 	public void setMethodCall(CallExpr methodCall) {
 		_methodCall = methodCall;
+	}
+
+	public CallExpr getMethodCall() {
+		return _methodCall;
 	}
 	
 	@Override
@@ -21,4 +22,8 @@ public class InvokeStmt extends Statement {
 		return _methodCall.toString();
 	}
 
+	@Override
+	public <T> T accept(ASTvisitor<T> v) {
+		return v.visit(this);
+	}
 }

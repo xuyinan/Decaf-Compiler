@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class ForStmt extends Statement {
     private String _id;
@@ -51,6 +52,8 @@ public class ForStmt extends Statement {
         return "for " + _id + "=" + _initExpr + "," + _finExpr + '\n' + _block.toString();
     }
 
-
-
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

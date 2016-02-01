@@ -1,4 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
+
+import decaf.ir.ASTvisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,4 +68,8 @@ public class MethodDecl extends Decl {
         return rst;
     }
 
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

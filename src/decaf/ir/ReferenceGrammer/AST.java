@@ -1,6 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
-// import decaf.ir.ASTVisitor;
+import decaf.ir.ASTvisitor;
 
 public abstract class AST {
     private int lineNumber;
@@ -22,5 +22,5 @@ public abstract class AST {
         return colNumber;
     }
 
-    // public abstract <T> T accept(ASTVisitor<T> v);
+    public abstract <T> T accept(ASTvisitor<T> v);
 }

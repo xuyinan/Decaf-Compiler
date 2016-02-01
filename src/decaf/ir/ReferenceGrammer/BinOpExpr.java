@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class BinOpExpr extends Expression{
 
@@ -46,6 +47,11 @@ public class BinOpExpr extends Expression{
     @Override
     public String toString(){
         return _lexpr + " " + _op.toString() + " " + _rexpr;
+    }
+
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
     }
 }
 

@@ -1,4 +1,4 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
 
 public abstract class Literal extends Expression {

@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class ArrayLocation extends Location {
     private Expression _expr;
@@ -32,5 +33,8 @@ public class ArrayLocation extends Location {
         return _id + "[" + _expr + "]";
     }
 
-
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class BoolLiteral extends Literal{
     private static int TRUE = 1;
@@ -26,14 +27,8 @@ public class BoolLiteral extends Literal{
         }
     }
 
-    public String getValue(){
-        if (_value == 1){
-            return "true";
-        }else if (_value == 0){
-            return "false";
-        }else{
-            return "Invalid boolean!";
-        }
+    public int getValue(){
+        return _value;
     }
 
     public Type getType() {
@@ -49,5 +44,10 @@ public class BoolLiteral extends Literal{
         }else{
             return "Invalid boolean!";
         }
+    }
+
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
     }
 }

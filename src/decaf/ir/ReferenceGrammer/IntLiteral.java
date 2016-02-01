@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class IntLiteral extends Literal{
     private String _rawValue;
@@ -30,7 +31,7 @@ public class IntLiteral extends Literal{
         return _rawValue;
     }
 
-    public int getValue(){
+    public Integer getValue(){
         return _value;
     }
 
@@ -44,4 +45,8 @@ public class IntLiteral extends Literal{
         return _rawValue;
     }
 
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

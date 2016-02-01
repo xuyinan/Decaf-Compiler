@@ -1,4 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
+
+import decaf.ir.ASTvisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +38,10 @@ public class VarDecl extends AST{
     @Override
     public String toString() {
         return _type + _ids.toString();
+    }
+
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
     }
 }

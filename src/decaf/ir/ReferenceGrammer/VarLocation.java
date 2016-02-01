@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class VarLocation extends Location {
     private int _blockId;
@@ -21,6 +22,9 @@ public class VarLocation extends Location {
     public String toString(){
         return _id;
     }
-
-
+    
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }

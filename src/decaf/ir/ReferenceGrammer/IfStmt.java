@@ -1,5 +1,6 @@
-package decaf.ReferenceGrammer;
+package decaf.ir.ReferenceGrammer;
 
+import decaf.ir.ASTvisitor;
 
 public class IfStmt extends Statement {
     private Expression _cond;
@@ -50,5 +51,8 @@ public class IfStmt extends Statement {
         return rst;
     }
 
-
+    @Override
+    public <T> T accept(ASTvisitor<T> v) {
+        return v.visit(this);
+    }
 }
